@@ -269,4 +269,16 @@ public class Driver
         frame.repaint();
     }
 
+    public static void deleteTemplate(ArrayList<JCheckBox> boxList, JFrame frame, JPanel deleteTempMenu)
+    {
+        for (JCheckBox box : boxList)
+        {
+            if (box.isSelected())
+            {
+                File file = new File("./Templates/" + box.getText());
+                file.delete();
+            }
+        }
+        openDeleteTemplateMenu(frame, deleteTempMenu);
+    }
 }
