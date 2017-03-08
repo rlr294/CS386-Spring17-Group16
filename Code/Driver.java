@@ -1,11 +1,20 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 import javax.swing.*;
+import javax.swing.JFileChooser;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import java.util.ArrayList;
 
+
+
 public class Driver
 {
+   
     public static void main(String[] args)
     {
         JFrame frame = new JFrame("Document Drafter");
@@ -53,6 +62,13 @@ public class Driver
                 JOptionPane.showMessageDialog(null, "To be implemented in release 3");
             }
         });
+        
+        JButton btnFile = new JButton("File Explorer");
+        btnFile.addActionListener(new ActionListener() { 
+               public void actionPerformed(ActionEvent e) {
+                   openFileExplorer();
+               }     
+        });
 
         mainMenu.add(Box.createVerticalStrut(70));
         mainMenu.add(btnDocs);
@@ -62,15 +78,25 @@ public class Driver
         mainMenu.add(btnPeeps);
         mainMenu.add(Box.createVerticalStrut(30));
         mainMenu.add(btnProps);
+        mainMenu.add(Box.createVerticalStrut(30));
+        mainMenu.add(btnFile);
 
         btnDocs.setAlignmentX(Component.CENTER_ALIGNMENT);
         btnTemps.setAlignmentX(Component.CENTER_ALIGNMENT);
         btnPeeps.setAlignmentX(Component.CENTER_ALIGNMENT);
         btnProps.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnFile.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         frame.add(mainMenu);
         frame.revalidate();
         frame.repaint();
+    }
+    
+    public static void openFileExplorer()
+    {
+     try{
+        Desktop.getDesktop().open(new File("./Documents"));
+    }catch(Exception e){}  
     }
 
     public static void openTemplateMenu(JFrame frame, JPanel mainMenu)
