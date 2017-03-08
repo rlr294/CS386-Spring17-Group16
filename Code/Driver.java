@@ -4,17 +4,13 @@
  * and open the template in the editor.
  */
 import javax.swing.*;
-import javax.swing.JFileChooser;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import java.util.ArrayList;
 
-
-
 public class Driver
 {
-   
     public static void main(String[] args)
     {
         JFrame frame = new JFrame("Document Drafter");
@@ -62,13 +58,6 @@ public class Driver
                 JOptionPane.showMessageDialog(null, "To be implemented in release 3");
             }
         });
-        
-        JButton btnFile = new JButton("File Explorer");
-        btnFile.addActionListener(new ActionListener() { 
-               public void actionPerformed(ActionEvent e) {
-                   openFileExplorer();
-               }     
-        });
 
         mainMenu.add(Box.createVerticalStrut(70));
         mainMenu.add(btnDocs);
@@ -78,25 +67,15 @@ public class Driver
         mainMenu.add(btnPeeps);
         mainMenu.add(Box.createVerticalStrut(30));
         mainMenu.add(btnProps);
-        mainMenu.add(Box.createVerticalStrut(30));
-        mainMenu.add(btnFile);
 
         btnDocs.setAlignmentX(Component.CENTER_ALIGNMENT);
         btnTemps.setAlignmentX(Component.CENTER_ALIGNMENT);
         btnPeeps.setAlignmentX(Component.CENTER_ALIGNMENT);
         btnProps.setAlignmentX(Component.CENTER_ALIGNMENT);
-        btnFile.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         frame.add(mainMenu);
         frame.revalidate();
         frame.repaint();
-    }
-    
-    public static void openFileExplorer()
-    {
-     try{
-        Desktop.getDesktop().open(new File("./Documents"));
-    }catch(Exception e){}  
     }
 
     public static void openTemplateMenu(JFrame frame, JPanel mainMenu)
@@ -169,7 +148,7 @@ public class Driver
                 //call template save function
             }
         });
-
+       
         JButton btnMainMenu = new JButton("Return to Main Menu");
         btnMainMenu.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -232,6 +211,21 @@ public class Driver
         newTempMenu.add(optionButtons);
         JScrollPane scroller = new JScrollPane(entryFields);
         newTempMenu.add(scroller);
+        btnSaveTemp.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                //call template save function
+            	SaveTemplate save = new SaveTemplate();//new
+            	
+            	ArrayList <String> text = new ArrayList<>();
+            	text.add(occupantT.getText());
+            	text.add(addressT.getText());
+            	text.add(cityT.getText());
+            	text.add(countyT.getText());
+            	text.add(bedroomsT.getText());
+            	
+				save.save(text);//new
+            }
+        });
 
         frame.add(newTempMenu);
         frame.revalidate();
