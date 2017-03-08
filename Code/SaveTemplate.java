@@ -16,7 +16,6 @@ public class SaveTemplate
 		boolean bool = false;
 		try
 		{
-
 			f = new File("./Templates/" + fileName + ".txt");
 			bool = f.createNewFile();
 

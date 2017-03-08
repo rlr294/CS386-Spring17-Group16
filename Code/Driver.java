@@ -420,6 +420,21 @@ public class Driver
         newTempMenu.add(optionButtons);
         JScrollPane scroller = new JScrollPane(entryFields);
         newTempMenu.add(scroller);
+        btnSaveTemp.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                //call template save function
+            	SaveTemplate save = new SaveTemplate();//new
+
+            	ArrayList <String> text = new ArrayList<>();
+            	text.add(occupantT.getText());
+            	text.add(addressT.getText());
+            	text.add(cityT.getText());
+            	text.add(countyT.getText());
+            	text.add(bedroomsT.getText());
+
+				save.save(text);//new
+            }
+        });
 
         frame.add(newTempMenu);
         frame.revalidate();
