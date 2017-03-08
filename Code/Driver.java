@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -138,8 +143,12 @@ public class Driver
         JPanel optionButtons = new JPanel();
         optionButtons.setMaximumSize(new Dimension(400, 40));
         JButton btnSaveTemp = new JButton("Save Template");
+        btnSaveTemp.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                //call template save function
+            }
+        });
        
-
         JButton btnMainMenu = new JButton("Return to Main Menu");
         btnMainMenu.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
