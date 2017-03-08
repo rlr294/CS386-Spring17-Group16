@@ -59,6 +59,13 @@ public class Driver
             }
         });
 
+        JButton btnFile = new JButton("File Explorer");
+        btnFile.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                openFileExplorer();
+            }
+       });
+
         mainMenu.add(Box.createVerticalStrut(70));
         mainMenu.add(btnDocs);
         mainMenu.add(Box.createVerticalStrut(30));
@@ -67,16 +74,28 @@ public class Driver
         mainMenu.add(btnPeeps);
         mainMenu.add(Box.createVerticalStrut(30));
         mainMenu.add(btnProps);
+        mainMenu.add(Box.createVerticalStrut(30));
+        mainMenu.add(btnFile);
+
 
         btnDocs.setAlignmentX(Component.CENTER_ALIGNMENT);
         btnTemps.setAlignmentX(Component.CENTER_ALIGNMENT);
         btnPeeps.setAlignmentX(Component.CENTER_ALIGNMENT);
         btnProps.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnFile.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         frame.add(mainMenu);
         frame.revalidate();
         frame.repaint();
     }
+
+    public static void openFileExplorer()
+    {
+    try{
+       Desktop.getDesktop().open(new File("./Documents"));
+    }catch(Exception e){}
+    }
+
 
     public static void openTemplateMenu(JFrame frame, JPanel mainMenu)
     {
@@ -148,7 +167,7 @@ public class Driver
                 //call template save function
             }
         });
-       
+
         JButton btnMainMenu = new JButton("Return to Main Menu");
         btnMainMenu.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -215,14 +234,14 @@ public class Driver
             public void actionPerformed(ActionEvent e) {
                 //call template save function
             	SaveTemplate save = new SaveTemplate();//new
-            	
+
             	ArrayList <String> text = new ArrayList<>();
             	text.add(occupantT.getText());
             	text.add(addressT.getText());
             	text.add(cityT.getText());
             	text.add(countyT.getText());
             	text.add(bedroomsT.getText());
-            	
+
 				save.save(text);//new
             }
         });
