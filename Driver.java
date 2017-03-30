@@ -8,8 +8,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import java.util.ArrayList;
-import org.apache.pdfbox.pdmodel.*;
-import org.apache.pdfbox.*;
 
 public class Driver
 {
