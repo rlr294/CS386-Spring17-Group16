@@ -48,7 +48,7 @@ public class Driver
         JButton btnPeeps = new JButton("People");
         btnPeeps.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "To be implemented in a future release");
+				openNewPerson(frame, mainMenu);
             }
         });
 
@@ -437,6 +437,133 @@ public class Driver
         });
 
         frame.add(newTempMenu);
+        frame.revalidate();
+        frame.repaint();
+    }
+   
+    public static void openNewPerson(JFrame frame, JPanel mainMenu)
+    {
+        frame.remove(mainMenu);
+
+        JPanel newPersMenu = new JPanel();
+        newPersMenu.setLayout(new BoxLayout(newPersMenu, BoxLayout.Y_AXIS));
+
+        JPanel optionButtons = new JPanel();
+        optionButtons.setMaximumSize(new Dimension(400, 40));
+        JButton btnSavePers = new JButton("Save Person");
+
+        JButton btnMainMenu = new JButton("Return to Main Menu");
+        btnMainMenu.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                openMainMenu(frame, newPersMenu);
+            }
+        });
+
+        optionButtons.add(btnSavePers);
+        optionButtons.add(btnMainMenu);
+
+        JPanel entryFields = new JPanel();
+        entryFields.setLayout(new BoxLayout(entryFields, BoxLayout.Y_AXIS));
+
+        JPanel fNameP = new JPanel();
+        JLabel fNameL = new JLabel("First Name: ");
+        JTextField fNameT = new JTextField(20);
+        fNameP.add(fNameL);
+        fNameP.add(fNameT);
+        
+        JPanel lNameP = new JPanel();
+        JLabel lNameL = new JLabel("Last Name: ");
+        JTextField lNameT = new JTextField(20);
+        lNameP.add(lNameL);
+        lNameP.add(lNameT);
+
+        JPanel emailP = new JPanel();
+        JLabel emailL = new JLabel("Email: ");
+        JTextField emailT = new JTextField(20);
+        emailP.add(emailL);
+        emailP.add(emailT);
+        
+        JPanel phoneP = new JPanel();
+        JLabel phoneL = new JLabel("Phone Number: ");
+        JTextField phoneT = new JTextField(20);
+        phoneP.add(phoneL);
+        phoneP.add(phoneT);
+
+        JPanel addressP = new JPanel();
+        JLabel addressL = new JLabel("Address: ");
+        JTextField addressT = new JTextField(20);
+        addressP.add(addressL);
+        addressP.add(addressT);
+
+        JPanel cityP = new JPanel();
+        JLabel cityL = new JLabel("City: ");
+        JTextField cityT = new JTextField(20);
+        cityP.add(cityL);
+        cityP.add(cityT);
+        
+        JPanel zipP = new JPanel();
+        JLabel zipL = new JLabel("Zip Code: ");
+        JTextField zipT = new JTextField(20);
+        zipP.add(zipL);
+        zipP.add(zipT);
+
+        JPanel countyP = new JPanel();
+        JLabel countyL = new JLabel("County: ");
+        JTextField countyT = new JTextField(20);
+        countyP.add(countyL);
+        countyP.add(countyT);
+
+        entryFields.add(fNameP);
+        entryFields.add(lNameP);
+        entryFields.add(emailP);
+        entryFields.add(phoneP);
+        entryFields.add(addressP);
+        entryFields.add(cityP);
+        entryFields.add(zipP);
+        entryFields.add(countyP);
+
+        btnSavePers.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+            	SavePerson save = new SavePerson();
+
+            	ArrayList <String> text = new ArrayList<>();
+
+            	text.add(fNameT.getText());
+            	text.add(lNameT.getText());
+            	text.add(emailT.getText());
+            	text.add(phoneT.getText());
+                text.add(addressT.getText());
+                text.add(cityT.getText());
+                text.add(zipT.getText());
+                text.add(countyT.getText());
+				save.save(text);
+            }
+        });
+
+        newPersMenu.add(optionButtons);
+        JScrollPane scroller = new JScrollPane(entryFields);
+        newPersMenu.add(scroller);
+        /*
+        btnSavePers.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                //call template save function
+            	SavePerson save = new SavePerson();//new
+
+            	ArrayList <String> text = new ArrayList<>();
+            	text.add(phoneT.getText());
+            	text.add(addressT.getText());
+            	text.add(cityT.getText());
+            	text.add(zipT.getText());
+            	text.add(countyT.getText());
+            	
+
+				save.save(text);//new
+            }
+        });
+        */
+
+        frame.add(newPersMenu);
         frame.revalidate();
         frame.repaint();
     }
