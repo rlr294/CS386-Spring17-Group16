@@ -727,21 +727,4 @@ public class Driver
         }
         openRenameDocMenu(frame, renameDocMenu);
     }
-
-    public static void openTestMenu(JFrame frame, JPanel documentMenu)
-    {
-        frame.remove(documentMenu);
-
-        JPanel testMenu = new JPanel();
-        testMenu.setLayout(new BoxLayout(testMenu, BoxLayout.Y_AXIS));
-
-        File file = new File("./Documents/Vacation Rental Agreement.pdf");
-
-        PDDocument doc = PDDocument.load(file);
-
-        frame.add(testMenu);
-        frame.revalidate();
-        frame.repaint();
-    }
-
 }
