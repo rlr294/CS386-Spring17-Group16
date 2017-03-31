@@ -16,7 +16,7 @@ public class SavePerson
 		boolean bool = false;
 		try
 		{
-			f = new File("Person.txt");
+			f = new File("./People/" + textList.get(0) + textList.get(1) + ".txt");
 			bool = f.createNewFile();
 
 			BufferedWriter writer = new BufferedWriter(new FileWriter(f));
