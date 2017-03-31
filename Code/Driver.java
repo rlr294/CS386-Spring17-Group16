@@ -34,7 +34,7 @@ public class Driver
         JButton btnDocs = new JButton("Documents");
         btnDocs.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "To be implemented in release 2");
+                openDocumentMenu(frame, mainMenu);
             }
         });
 
@@ -48,14 +48,14 @@ public class Driver
         JButton btnPeeps = new JButton("People");
         btnPeeps.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "To be implemented in release 3");
+                JOptionPane.showMessageDialog(null, "To be implemented in a future release");
             }
         });
 
         JButton btnProps = new JButton("Properties");
         btnProps.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "To be implemented in release 3");
+                JOptionPane.showMessageDialog(null, "To be implemented in a future release");
             }
         });
 
@@ -509,5 +509,222 @@ public class Driver
             }
         }
         openDeleteTemplateMenu(frame, deleteTempMenu);
+    }
+
+    public static void openDocumentMenu(JFrame frame, JPanel mainMenu)
+    {
+        frame.remove(mainMenu);
+
+        JPanel documentMenu = new JPanel();
+        documentMenu.setLayout(new BoxLayout(documentMenu, BoxLayout.Y_AXIS));
+
+        JButton btnNewDoc = new JButton("New Document");
+        btnNewDoc.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null, "To be implemented in future releases");
+            }
+        });
+
+        JButton btnEditDoc = new JButton("Edit Document");
+        btnEditDoc.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+                //open edit Document View
+                JOptionPane.showMessageDialog(null, "To be implemented in future releases");
+            }
+        });
+
+        JButton btnDeleteDoc = new JButton("Delete Document");
+        btnDeleteDoc.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                openDeleteDocMenu(frame, documentMenu);
+            }
+        });
+
+        JButton btnRenameDoc = new JButton("Rename Document");
+        btnRenameDoc.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                openRenameDocMenu(frame, documentMenu);
+            }
+        });
+
+        JButton btnMainMenu = new JButton("Return to Main Menu");
+        btnMainMenu.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                openMainMenu(frame, documentMenu);
+            }
+        });
+
+        documentMenu.add(Box.createVerticalStrut(70));
+        documentMenu.add(btnNewDoc);
+        documentMenu.add(Box.createVerticalStrut(30));
+        documentMenu.add(btnEditDoc);
+        documentMenu.add(Box.createVerticalStrut(30));
+        documentMenu.add(btnDeleteDoc);
+        documentMenu.add(Box.createVerticalStrut(30));
+        documentMenu.add(btnRenameDoc);
+        documentMenu.add(Box.createVerticalStrut(30));
+        documentMenu.add(btnMainMenu);
+
+        btnNewDoc.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnEditDoc.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnDeleteDoc.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnRenameDoc.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnMainMenu.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        frame.add(documentMenu);
+        frame.revalidate();
+        frame.repaint();
+    }
+
+    public static void openDeleteDocMenu(JFrame frame, JPanel documentMenu)
+    {
+        frame.remove(documentMenu);
+
+        JPanel deleteDocMenu = new JPanel();
+        deleteDocMenu.setLayout(new BoxLayout(deleteDocMenu, BoxLayout.Y_AXIS));
+
+        File folder = new File("./Documents");
+        File[] listOfFiles = folder.listFiles();
+
+        ArrayList<JCheckBox> boxList = new ArrayList<JCheckBox>();
+
+        for (int i = 0; i < listOfFiles.length; i++)
+        {
+            if (listOfFiles[i].isFile())
+            {
+                JCheckBox tempCheck = new JCheckBox(listOfFiles[i].getName());
+                boxList.add(tempCheck);
+            }
+        }
+
+        JPanel optionButtons = new JPanel();
+        optionButtons.setMaximumSize(new Dimension(400, 40));
+        JButton btnDeleteDoc = new JButton("Delete Checked Documents");
+        btnDeleteDoc.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                deleteDocument(boxList, frame, deleteDocMenu);
+            }
+        });
+
+        JButton btnMainMenu = new JButton("Return to Main Menu");
+        btnMainMenu.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                openMainMenu(frame, deleteDocMenu);
+            }
+        });
+
+        optionButtons.add(btnDeleteDoc);
+        optionButtons.add(btnMainMenu);
+
+        JPanel files = new JPanel();
+        files.setLayout(new BoxLayout(files, BoxLayout.Y_AXIS));
+
+        for (JCheckBox box : boxList)
+        {
+            files.add(box);
+        }
+
+        deleteDocMenu.add(optionButtons);
+        JScrollPane scroller = new JScrollPane(files);
+        deleteDocMenu.add(scroller);
+
+        frame.add(deleteDocMenu);
+        frame.revalidate();
+        frame.repaint();
+    }
+
+    public static void deleteDocument(ArrayList<JCheckBox> boxList, JFrame frame, JPanel deleteDocMenu)
+    {
+        for (JCheckBox box : boxList)
+        {
+            if (box.isSelected())
+            {
+                File file = new File("./Documents/" + box.getText());
+                file.delete();
+            }
+        }
+        openDeleteTemplateMenu(frame, deleteDocMenu);
+    }
+
+    public static void openRenameDocMenu(JFrame frame, JPanel documentMenu)
+    {
+        frame.remove(documentMenu);
+
+        JPanel renameDocMenu = new JPanel();
+        renameDocMenu.setLayout(new BoxLayout(renameDocMenu, BoxLayout.Y_AXIS));
+
+        File folder = new File("./Documents");
+        File[] listOfFiles = folder.listFiles();
+
+        ArrayList<JRadioButton> radioList = new ArrayList<JRadioButton>();
+        ButtonGroup radioButtons = new ButtonGroup();
+
+        for (int i = 0; i < listOfFiles.length; i++)
+        {
+            if (listOfFiles[i].isFile())
+            {
+                JRadioButton tempRadio = new JRadioButton(listOfFiles[i].getName());
+                radioList.add(tempRadio);
+                radioButtons.add(tempRadio);
+            }
+        }
+
+        JPanel optionButtons = new JPanel();
+        optionButtons.setMaximumSize(new Dimension(400, 40));
+        JButton btnRenameDoc = new JButton("Rename Selected Document");
+        btnRenameDoc.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String userInput = JOptionPane.showInputDialog("Document's New Name: ");
+                if(userInput != null)
+                {
+                    renameDocument(radioList, userInput, frame, renameDocMenu);
+                }
+            }
+        });
+
+        JButton btnMainMenu = new JButton("Return to Main Menu");
+        btnMainMenu.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                openMainMenu(frame, renameDocMenu);
+            }
+        });
+
+        optionButtons.add(btnRenameDoc);
+        optionButtons.add(btnMainMenu);
+
+        JPanel files = new JPanel();
+        files.setLayout(new BoxLayout(files, BoxLayout.Y_AXIS));
+
+        for (JRadioButton radio : radioList)
+        {
+            files.add(radio);
+        }
+
+        renameDocMenu.add(optionButtons);
+        JScrollPane scroller = new JScrollPane(files);
+        renameDocMenu.add(scroller);
+
+        frame.add(renameDocMenu);
+        frame.revalidate();
+        frame.repaint();
+    }
+
+    public static void renameDocument(ArrayList<JRadioButton> radioList, String newName, JFrame frame, JPanel renameDocMenu)
+    {
+        for (JRadioButton radio : radioList)
+        {
+            if (radio.isSelected())
+            {
+                File file = new File("./Documents/" + radio.getText());
+                File newFile = new File("./Documents/" + newName);
+                Boolean success = file.renameTo(newFile);
+
+                if (success == false)
+                {
+                    JOptionPane.showMessageDialog(null, "Failed to rename file");
+                }
+            }
+        }
+        openRenameDocMenu(frame, renameDocMenu);
     }
 }
