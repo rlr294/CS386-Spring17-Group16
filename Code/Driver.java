@@ -645,12 +645,15 @@ public class Driver
         JPanel documentMenu = new JPanel();
         documentMenu.setLayout(new BoxLayout(documentMenu, BoxLayout.Y_AXIS));
 
+        JPanel docP = new JPanel();
+        JLabel docL = new JLabel("Document Name: ");
+        JTextField newDocT = new JTextField(1);
+        docP.add(docL);
+        docP.add(newDocT);
+
+        //JTextField newDocT = new JTextField(1);
         JButton btnNewDoc = new JButton("New Document");
-        btnNewDoc.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "To be implemented in future releases");
-            }
-        });
+       
 
         JButton btnEditDoc = new JButton("Edit Document");
         btnEditDoc.addActionListener(new ActionListener() {
@@ -680,9 +683,11 @@ public class Driver
                 openMainMenu(frame, documentMenu);
             }
         });
-
-        documentMenu.add(Box.createVerticalStrut(70));
+        
+        documentMenu.add(Box.createVerticalStrut(30));
         documentMenu.add(btnNewDoc);
+        documentMenu.add(docP);
+        documentMenu.add(newDocT);
         documentMenu.add(Box.createVerticalStrut(30));
         documentMenu.add(btnEditDoc);
         documentMenu.add(Box.createVerticalStrut(30));
@@ -691,6 +696,20 @@ public class Driver
         documentMenu.add(btnRenameDoc);
         documentMenu.add(Box.createVerticalStrut(30));
         documentMenu.add(btnMainMenu);
+        btnNewDoc.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				File f = null;
+				//boolean bool = false;
+				f = new File(newDocT.getText()+".txt");
+				try {
+					f.createNewFile();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				System.out.println("Created Document");
+            }
+        });
 
         btnNewDoc.setAlignmentX(Component.CENTER_ALIGNMENT);
         btnEditDoc.setAlignmentX(Component.CENTER_ALIGNMENT);
