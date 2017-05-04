@@ -697,7 +697,7 @@ public class Driver
         newDocMenu.setLayout(new BoxLayout(newDocMenu, BoxLayout.Y_AXIS));
 
         JPanel optionButtons = new JPanel();
-        optionButtons.setMaximumSize(new Dimension(400, 40));
+        optionButtons.setMaximumSize(new Dimension(600, 40));
         JButton btnSaveDoc = new JButton("Save Document");
         JButton btnApplyTemp = new JButton("Apply Template");
 
